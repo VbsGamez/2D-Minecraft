@@ -1,0 +1,156 @@
+var canvas=new fabric.Canvas('myCanvas');
+p_x=10;
+p_y=10;
+b_w=30;
+b_h=30;
+var player="";
+var block="";
+function player_update()
+{
+    fabric.Image.fromURL("player.PNG",function(Img)
+    {
+      player=Img;
+      player.scaleToWidth(150);
+      player.scaleToHeight(140);
+      player.set(
+          {
+              top:p_y,
+              left:p_x
+          });
+          canvas.add(player);
+    });
+}
+function block_image(get_image)
+{
+    fabric.Image.fromURL(get_image,function(Img)
+    {
+      block=Img;
+      block.scaleToWidth(b_w);
+      block.scaleToHeight(b_h);
+      block.set(
+          {
+              top:p_y,
+              left:p_x
+          });
+          canvas.add(block);
+    });
+}
+window.addEventListener("keydown",my_keydown);
+function my_keydown(e)
+{
+    keyPressed=e.keyCode;
+    if(e.shiftKey==true&&keyPressed=='80')
+    {
+        b_w=b_w+10;
+        b_h=b_h+10;
+        document.getElementById("current_width").innerHTML=b_w;
+        document.getElementById("current_height").innerHTML=b_h;
+    }
+    if(e.shiftKey==true&&keyPressed=='77')
+    {
+        b_w=b_w-10;
+        b_h=b_h-10;
+        document.getElementById("current_width").innerHTML=b_w;
+        document.getElementById("current_height").innerHTML=b_h;
+    }
+    if(keyPressed=='38')
+    {
+        up();
+        console.log("up");
+    }
+    if(keyPressed=='40')
+    {
+        down();
+        console.log("down");
+    }
+    if(keyPressed=='37')
+    {
+        left();
+        console.log("left");
+    }
+    if(keyPressed=='39')
+    {
+        right();
+        console.log("right");
+    }
+    if(keyPressed=='78')
+    {
+        block_image('brick.jpg');
+    }
+    if(keyPressed=='68')
+    {
+        block_image('Dirt.png');
+    }
+    if(keyPressed=='71')
+    {
+        block_image('glowstone.png');
+    }
+    if(keyPressed=='78')
+    {
+        block_image('netherack.jpg');
+    }
+    if(keyPressed=='73')
+    {
+        block_image('oak_leaves.png');
+    }
+    if(keyPressed=='79')
+    {
+        block_image('oak_wood.jpg');
+    }
+    if(keyPressed=='65')
+    {
+        block_image('sludge.png');
+    }
+    if(keyPressed=='83')
+    {
+        block_image('Soul_Grass.jpg');
+    }
+    if(keyPressed=='66')
+    {
+        block_image('Testapia_wood.jpg');
+    }
+    if(keyPressed=='89')
+    {
+        block_image('yellow_brick.jpg');
+    }
+}
+function up()
+{
+    if(p_y>=0)
+    {
+        p_y=p_y-b_h;
+        canvas.remove(player);
+        player_update();
+
+    }
+}
+function down()
+{
+    if(p_y<=460)
+    {
+        p_y=p_y+b_h;
+        canvas.remove(player);
+        player_update();
+
+    }
+}
+function left()
+{
+    if(p_x>0)
+    {
+        p_x=p_x-b_w;
+        canvas.remove(player);
+        player_update();
+
+    }
+}
+function right()
+{
+    if(p_x<=850)
+    {
+        p_x=p_x+b_h;
+        canvas.remove(player);
+        player_update();
+
+    }
+}
